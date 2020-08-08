@@ -1,4 +1,6 @@
-const FILES_TO_CACHE = ["/", "/index.html", "app.js", "favicon.ico", "index.js"]; // Generate a list of the files that we want it to cache
+// const FILES_TO_CACHE = ["/", "/index.html", "app.js", "favicon.ico", "index.js"]; // Generate a list of the files that we want it to cache
+const FILES_TO_CACHE = ["/", "/styles.css", "/index.js", "/manifest.webmanifest"]; // Generate a list of the files that we want it to cache
+
 
 const CACHE_NAME = "static-cache-v2"; // Set-up our cache names
 const DATA_CACHE_NAME = "data-cache-v1";
@@ -34,24 +36,33 @@ self.addEventListener("activate", function(evt) { // Adding an event listener fo
 
 // fetch
 self.addEventListener("fetch", function(evt) { // Adding an event listener for fetch - This will intercept any fetch requests to the back end 
-  if (evt.request.url.includes("/api/")) {
-    evt.respondWith(
-      caches.open(DATA_CACHE_NAME).then(cache => {
-        return fetch(evt.request)
-          .then(response => {
-            // If the response was good, clone it and store it in the cache.
-            if (response.status === 200) {
-              cache.put(evt.request.url, response.clone());
-            }
+evt.respondWith(
+  caches.open(CACHE_NAME).then((cache) => {
+  return cache.match(evt.request)  
+  }
+  )
+)
+});
 
-            return response;
-          })
-          .catch(err => {
-            // Network request failed, try to get it from the cache.
-            return cache.match(evt.request); // We are caching any fetch request 
-          });
-      }).catch(err => console.log(err)) // If it fails, use the cache version
-    );
+// self.addEventListener("fetch", function(evt) { // Adding an event listener for fetch - This will intercept any fetch requests to the back end 
+//   if (evt.request.url.includes("/api/")) {
+//     evt.respondWith(
+//       caches.open(DATA_CACHE_NAME).then(cache => {
+//         return fetch(evt.request)
+//           .then(response => {
+//             // If the response was good, clone it and store it in the cache.
+//             if (response.status === 200) {
+//               cache.put(evt.request.url, response.clone());
+//             }
 
-    return;
-}});
+//             return response;
+//           })
+//           .catch(err => {
+//             // Network request failed, try to get it from the cache.
+//             return cache.match(evt.request); // We are caching any fetch request 
+//           });
+//       }).catch(err => console.log(err)) // If it fails, use the cache version
+//     );
+
+//     return;
+// }});

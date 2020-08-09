@@ -111,7 +111,7 @@ function sendTransaction(isAdding) {
   populateChart();
   populateTable();
   populateTotal();
-  
+  console.log(transaction);
   // also send to server
   fetch("/api/transaction", {
     method: "POST",

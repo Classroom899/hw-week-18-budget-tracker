@@ -1,5 +1,5 @@
 // const FILES_TO_CACHE = ["/", "/index.html", "app.js", "favicon.ico", "index.js"]; // Generate a list of the files that we want it to cache
-const FILES_TO_CACHE = ["/", "/styles.css", "/index.js", "/manifest.webmanifest"]; // Generate a list of the files that we want it to cache
+const FILES_TO_CACHE = ["/", "/styles.css", "/index.js", "/manifest.webmanifest", "db.js"]; // Generate a list of the files that we want it to cache
 
 
 const CACHE_NAME = "static-cache-v2"; // Set-up our cache names

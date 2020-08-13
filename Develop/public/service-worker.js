@@ -30,7 +30,6 @@ self.addEventListener("activate", function(evt) { // Adding an event listener fo
       );
     })
   );
-
   self.clients.claim();
 });
 
